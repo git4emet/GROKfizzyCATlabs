@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BindPage } from "@/components/canon/bind-page";
+import { AdapterPage } from "@/components/adapter/adapter-page";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  return <BindPage />;
+  return <AdapterPage />;
 }

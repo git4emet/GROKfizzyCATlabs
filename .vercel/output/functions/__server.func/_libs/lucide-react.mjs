@@ -82,12 +82,17 @@ var createLucideIcon = (iconName, iconNode) => {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var ArrowUpRight = createLucideIcon("arrow-up-right", [["path", {
-	d: "M7 7h10v10",
-	key: "1tivn9"
+var Copy = createLucideIcon("copy", [["rect", {
+	width: "14",
+	height: "14",
+	x: "8",
+	y: "8",
+	rx: "2",
+	ry: "2",
+	key: "17jyea"
 }], ["path", {
-	d: "M7 17 17 7",
-	key: "1vkiza"
+	d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2",
+	key: "zix9uf"
 }]]);
 /**
 * @license lucide-react v0.510.0 - ISC
@@ -95,86 +100,20 @@ var ArrowUpRight = createLucideIcon("arrow-up-right", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Download = createLucideIcon("download", [
+var ExternalLink = createLucideIcon("external-link", [
 	["path", {
-		d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4",
-		key: "ih7n3h"
+		d: "M15 3h6v6",
+		key: "1q9fwt"
 	}],
-	["polyline", {
-		points: "7 10 12 15 17 10",
-		key: "2ggqvy"
+	["path", {
+		d: "M10 14 21 3",
+		key: "gplh6r"
 	}],
-	["line", {
-		x1: "12",
-		x2: "12",
-		y1: "15",
-		y2: "3",
-		key: "1vk2je"
+	["path", {
+		d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6",
+		key: "a6xqqp"
 	}]
 ]);
-/**
-* @license lucide-react v0.510.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Link2Off = createLucideIcon("link-2-off", [
-	["path", {
-		d: "M9 17H7A5 5 0 0 1 7 7",
-		key: "10o201"
-	}],
-	["path", {
-		d: "M15 7h2a5 5 0 0 1 4 8",
-		key: "1d3206"
-	}],
-	["line", {
-		x1: "8",
-		x2: "12",
-		y1: "12",
-		y2: "12",
-		key: "rvw6j4"
-	}],
-	["line", {
-		x1: "2",
-		x2: "22",
-		y1: "2",
-		y2: "22",
-		key: "a6p6uj"
-	}]
-]);
-/**
-* @license lucide-react v0.510.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Link2 = createLucideIcon("link-2", [
-	["path", {
-		d: "M9 17H7A5 5 0 0 1 7 7h2",
-		key: "8i5ue5"
-	}],
-	["path", {
-		d: "M15 7h2a5 5 0 1 1 0 10h-2",
-		key: "1b9ql8"
-	}],
-	["line", {
-		x1: "8",
-		x2: "16",
-		y1: "12",
-		y2: "12",
-		key: "1jonct"
-	}]
-]);
-/**
-* @license lucide-react v0.510.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var LoaderCircle = createLucideIcon("loader-circle", [["path", {
-	d: "M21 12a9 9 0 1 1-6.219-8.56",
-	key: "13zald"
-}]]);
 /**
 * @license lucide-react v0.510.0 - ISC
 *
@@ -194,26 +133,32 @@ var Plus = createLucideIcon("plus", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var ScanLine = createLucideIcon("scan-line", [
+var Trash2 = createLucideIcon("trash-2", [
 	["path", {
-		d: "M3 7V5a2 2 0 0 1 2-2h2",
-		key: "aa7l1z"
+		d: "M3 6h18",
+		key: "d0wm0j"
 	}],
 	["path", {
-		d: "M17 3h2a2 2 0 0 1 2 2v2",
-		key: "4qcy5o"
+		d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6",
+		key: "4alrt4"
 	}],
 	["path", {
-		d: "M21 17v2a2 2 0 0 1-2 2h-2",
-		key: "6vwrx8"
+		d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2",
+		key: "v07s0e"
 	}],
-	["path", {
-		d: "M7 21H5a2 2 0 0 1-2-2v-2",
-		key: "ioqczr"
+	["line", {
+		x1: "10",
+		x2: "10",
+		y1: "11",
+		y2: "17",
+		key: "1uufr5"
 	}],
-	["path", {
-		d: "M7 12h10",
-		key: "b7w52i"
+	["line", {
+		x1: "14",
+		x2: "14",
+		y1: "11",
+		y2: "17",
+		key: "xtxkd"
 	}]
 ]);
 /**
@@ -236,18 +181,5 @@ var TriangleAlert = createLucideIcon("triangle-alert", [
 		key: "p32p05"
 	}]
 ]);
-/**
-* @license lucide-react v0.510.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var X = createLucideIcon("x", [["path", {
-	d: "M18 6 6 18",
-	key: "1bl5f8"
-}], ["path", {
-	d: "m6 6 12 12",
-	key: "d8bk6v"
-}]]);
 //#endregion
-export { LoaderCircle as a, Download as c, Plus as i, ArrowUpRight as l, TriangleAlert as n, Link2 as o, ScanLine as r, Link2Off as s, X as t };
+export { Copy as a, ExternalLink as i, Trash2 as n, Plus as r, TriangleAlert as t };

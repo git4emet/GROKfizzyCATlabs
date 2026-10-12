@@ -1,12 +1,13 @@
-import { i as __toESM } from "../_runtime.mjs";
+import { i as __toESM, n as __exportAll } from "../_runtime.mjs";
 import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].mjs";
-import { _ as useRouter, f as createRouter, g as createRootRoute, h as createFileRoute, l as Scripts, m as lazyRouteComponent, p as Outlet, u as HeadContent } from "../_libs/@tanstack/react-router+[...].mjs";
+import { _ as lazyRouteComponent, b as useRouter, f as Scripts, g as Outlet, h as createRouter, p as HeadContent, v as createFileRoute, y as createRootRoute } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as require_jsx_runtime } from "../_libs/radix-ui__react-context+react.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
-import { n as TriangleAlert } from "../_libs/lucide-react.mjs";
+import { t as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { t as Toaster } from "../_libs/sonner.mjs";
 import { t as Provider } from "../_libs/radix-ui__react-tooltip.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-Cdd0MijJ.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-BVALnGum.js
+var router_BVALnGum_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AppErrorComponent({ error }) {
@@ -27,7 +28,7 @@ function AppErrorComponent({ error }) {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 				className: "max-w-md text-sm break-words text-zinc-500 dark:text-zinc-400",
-				children: error.message || "An unexpected error occurred. Try reloading the page."
+				children: error instanceof Error ? error.message : "An unexpected error occurred. Try reloading the page."
 			})
 		]
 	});
@@ -281,8 +282,8 @@ function TooltipProvider({ delayDuration = 200, ...props }) {
 		...props
 	});
 }
-var styles_default = "/assets/styles-MVKEDHMi.css";
-var APP_NAME = "Canon Bind";
+var styles_default = "/assets/styles-DmTWivVf.css";
+var APP_NAME = "FCP Adapter";
 var Route$1 = createRootRoute({
 	head: () => ({
 		meta: [
@@ -294,7 +295,7 @@ var Route$1 = createRootRoute({
 			{ title: APP_NAME },
 			{
 				name: "description",
-				content: "Bind GitHub, Drive, Canva, and the rest of your stack to the Möbii³us canonical slots."
+				content: "Make a field connection profile, or connect one you already have."
 			},
 			{
 				name: "theme-color",
@@ -356,7 +357,7 @@ function RootDocument() {
 		})]
 	});
 }
-var $$splitComponentImporter = () => import("./routes-5O7KmfOI.mjs");
+var $$splitComponentImporter = () => import("./routes-BigzHql3.mjs");
 var rootRouteChildren = { IndexRoute: createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter, "component") }).update({
 	id: "/",
 	path: "/",
@@ -370,4 +371,4 @@ function getRouter() {
 	});
 }
 //#endregion
-export { getRouter };
+export { getRouter, router_BVALnGum_exports as t };

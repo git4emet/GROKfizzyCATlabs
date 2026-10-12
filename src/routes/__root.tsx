@@ -10,7 +10,7 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Canon Bind";
+const APP_NAME = "FCP Adapter";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,8 +20,7 @@ export const Route = createRootRoute({
       { title: APP_NAME },
       {
         name: "description",
-        content:
-          "Bind GitHub, Drive, Canva, and the rest of your stack to the Möbii³us canonical slots.",
+        content: "Make a field connection profile, or connect one you already have.",
       },
       { name: "theme-color", content: "#0a0a0b" },
     ],
