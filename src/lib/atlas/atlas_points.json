@@ -1,0 +1,467 @@
+{
+  "name": "Living Atlas",
+  "volume": {
+    "ports": 42,
+    "workflows": 21,
+    "loops": 7,
+    "paths": 7,
+    "gates": 7,
+    "fft": 4
+  },
+  "hinge": "handoff",
+  "chain": [
+    {
+      "step": "1",
+      "who": "Engineers",
+      "does": "Generate drill requests"
+    },
+    {
+      "step": "2",
+      "who": "Business office",
+      "does": "Assign lots"
+    },
+    {
+      "step": "3",
+      "who": "E&D Logs",
+      "does": "Receive the jobs",
+      "person": "Allexx Daniel"
+    },
+    {
+      "step": "—",
+      "who": "Unassigned",
+      "does": "File the GSOC ticket and confirm Positive Response",
+      "gap": true
+    },
+    {
+      "step": "4",
+      "who": "Drilling Coordinator",
+      "does": "Direct the rigs by walkie"
+    }
+  ],
+  "points": [
+    {
+      "id": "intake",
+      "name": "Intake",
+      "kind": "loop",
+      "descriptor": "The request, as it arrived, before anyone improves it.",
+      "analogies": [
+        "A drill request left on the desk in the words that were sent.",
+        "A sample bag whose label has not been rewritten yet."
+      ],
+      "evaluation": "Useful only while the arriving words stay the arriving words.",
+      "owner": "Whoever sent it.",
+      "standing": "named",
+      "lane": { "r": 0.15, "g": 0.75, "b": 0.1 }
+    },
+    {
+      "id": "bind",
+      "name": "Bind",
+      "kind": "loop",
+      "descriptor": "Attach the request to a job, a lot, or a card that already exists. Make a card only if none does.",
+      "analogies": [
+        "A lot number written on a request that already had a job.",
+        "A certificate whose name matches the device that is asking."
+      ],
+      "evaluation": "A certificate trusted on the workstation is not trusted on the phone. 127.0.0.1 is whichever device is asking, not the other one.",
+      "owner": "The person holding both records.",
+      "standing": "named",
+      "lane": { "r": 0.1, "g": 0.7, "b": 0.2 }
+    },
+    {
+      "id": "route",
+      "name": "Route",
+      "kind": "loop",
+      "descriptor": "Say which reading this is. Dream, Field, and Street do not correct each other.",
+      "analogies": [
+        "Choosing a falling-weight test or a core, because the question picked one.",
+        "Filing a note with the desk that can actually use it."
+      ],
+      "evaluation": "A department name does not decide whether an excavation notice is required. The activity does.",
+      "owner": "The person who picks the method.",
+      "standing": "named",
+      "lane": { "r": 0.25, "g": 0.5, "b": 0.25 }
+    },
+    {
+      "id": "handoff",
+      "name": "Handoff",
+      "kind": "loop",
+      "descriptor": "The next person is named, or this seat stays empty.",
+      "analogies": [
+        "A walkie call to a rig.",
+        "A ticket number written against a lot before that call."
+      ],
+      "evaluation": "Engineers request the drills, the office assigns the lots, E&D Logs receives the jobs, and the Drilling Coordinator directs the rigs. Nobody in that chain is named as the one who files the GSOC ticket or confirms Positive Response. Proposed, and not installed: E&D Logs records the ticket number and the Positive Response against the lot before release. The first question is whether walkie direction ever happens before a ticket exists.",
+      "owner": "Unassigned.",
+      "standing": "open",
+      "lane": { "r": 0.34, "g": 0.33, "b": 0.33 }
+    },
+    {
+      "id": "witness",
+      "name": "Witness",
+      "kind": "loop",
+      "descriptor": "Write what was seen. Leave the earlier line where it is.",
+      "analogies": [
+        "A field note that does not eat the boring log.",
+        "A second lamp on the same thin section."
+      ],
+      "evaluation": "Seeing a crack is not the same as naming its cause. Both observations can stay.",
+      "owner": "The person who was there.",
+      "standing": "named",
+      "lane": { "r": 0.2, "g": 0.65, "b": 0.15 }
+    },
+    {
+      "id": "return",
+      "name": "Return",
+      "kind": "loop",
+      "descriptor": "The result goes back to the person who asked, with the limit still attached.",
+      "analogies": [
+        "A report put back on the desk that requested the test.",
+        "A marked line that still has to be checked against the ground."
+      ],
+      "evaluation": "A workbench status, a hash, or a survey does not authorize excavation. A marked response still has to meet the site.",
+      "owner": "The reviewer who sends it back.",
+      "standing": "named",
+      "lane": { "r": 0.1, "g": 0.45, "b": 0.45 }
+    },
+    {
+      "id": "keep",
+      "name": "Keep",
+      "kind": "loop",
+      "descriptor": "The dataset remains. New seats are appended. Earlier seats are not rewritten to fit them.",
+      "analogies": [
+        "A laboratory record after the report is signed.",
+        "A host entry that still resolves yesterday's name."
+      ],
+      "evaluation": "Spectra QEST and Construction Hive stay the systems of record. Nothing on this page is a connection to them.",
+      "owner": "The record. Not a new department.",
+      "standing": "named",
+      "lane": { "r": 0.15, "g": 0.7, "b": 0.15 }
+    },
+    {
+      "id": "construction",
+      "name": "Construction",
+      "kind": "path",
+      "descriptor": "Materials testing, special inspections, QA/QC, field observations. A public family, not an organizational chart.",
+      "analogies": [
+        "A special inspection of a bolted connection.",
+        "A floor-flatness number that still needs the spec it was measured against."
+      ],
+      "evaluation": "The public pages name the work. They do not say which kit is free today.",
+      "owner": "The inspector on that visit. Not named here.",
+      "standing": "named",
+      "lane": { "r": 0.1, "g": 0.35, "b": 0.55 }
+    },
+    {
+      "id": "geotechnical",
+      "name": "Geotechnical",
+      "kind": "path",
+      "descriptor": "Drilling, CPTu, foundations, geophysics, instrumentation.",
+      "analogies": [
+        "A boring that becomes a sample.",
+        "A rig on a truck, a track, or a barge, still one boring program."
+      ],
+      "evaluation": "The locate assessment is in the proposed chain. The public pages do not name who files it.",
+      "owner": "Unassigned for the locate ticket.",
+      "standing": "proposed",
+      "lane": { "r": 0.15, "g": 0.55, "b": 0.3 }
+    },
+    {
+      "id": "pavements",
+      "name": "Pavements",
+      "kind": "path",
+      "descriptor": "GPR, FWD, DCP, LWD, laser profiling, mix design.",
+      "analogies": [
+        "A deflection bowl.",
+        "A core cut only where the question needs one."
+      ],
+      "evaluation": "A nonintrusive falling-weight survey is not, by itself, an excavation. A later boring may be.",
+      "owner": "The pavement engineer for the question in front of them.",
+      "standing": "named",
+      "lane": { "r": 0.1, "g": 0.4, "b": 0.5 }
+    },
+    {
+      "id": "building",
+      "name": "Building",
+      "kind": "path",
+      "descriptor": "Envelope, distress, structural assessment, forensics.",
+      "analogies": [
+        "A moisture map of a wall.",
+        "A repair detail that has to be looked at again after the work."
+      ],
+      "evaluation": "History, test, sample, interpretation, repair, and a second look. A missing one is a missing step.",
+      "owner": "The investigating engineer.",
+      "standing": "named",
+      "lane": { "r": 0.2, "g": 0.3, "b": 0.5 }
+    },
+    {
+      "id": "ndt",
+      "name": "Nondestructive",
+      "kind": "path",
+      "descriptor": "Ultrasonic, phased array, radiography, magnetic particle, penetrant, visual.",
+      "analogies": [
+        "A calibrated screen.",
+        "A disposition written after the indication, not before it."
+      ],
+      "evaluation": "Coverage and calibration belong in the record. An indication is not yet accept or reject.",
+      "owner": "The examiner, then the person who signs the disposition.",
+      "standing": "named",
+      "lane": { "r": 0.15, "g": 0.45, "b": 0.4 }
+    },
+    {
+      "id": "environmental",
+      "name": "Environmental",
+      "kind": "path",
+      "descriptor": "Site assessments, sampling, air, compliance.",
+      "analogies": [
+        "A Phase I that is documents.",
+        "A Phase II that is samples."
+      ],
+      "evaluation": "Those are different activities. The second can be intrusive. The first usually is not.",
+      "owner": "The person who wrote the sampling plan.",
+      "standing": "named",
+      "lane": { "r": 0.1, "g": 0.5, "b": 0.4 }
+    },
+    {
+      "id": "laboratories",
+      "name": "Laboratories",
+      "kind": "path",
+      "descriptor": "Petrography, chemistry, concrete, asphalt, aggregate, and the environmental bench.",
+      "analogies": [
+        "Two lamps on one specimen.",
+        "A number that belongs to a named method."
+      ],
+      "evaluation": "The October 15 note flags a public petrography page pairing AASHTO T 277 with ASTM C856. T 277 is chloride-ion penetration, not a petrographic method. That distinction stays visible.",
+      "owner": "The analyst who signs the method.",
+      "standing": "named",
+      "lane": { "r": 0.2, "g": 0.5, "b": 0.3 }
+    },
+    {
+      "id": "knowledge",
+      "name": "Knowledge",
+      "kind": "gate",
+      "descriptor": "What is already written down.",
+      "analogies": [
+        "A library card for a book that is on the shelf.",
+        "A boring log from an earlier job on the same street."
+      ],
+      "evaluation": "It tells you what was recorded. It does not tell you the ground has stayed put.",
+      "owner": "The archive.",
+      "standing": "named",
+      "lane": { "r": 0.7, "g": 0.2, "b": 0.1 }
+    },
+    {
+      "id": "prophecy",
+      "name": "Prophecy",
+      "kind": "gate",
+      "descriptor": "What is expected if the stated conditions hold.",
+      "analogies": [
+        "A weather brief before a pour.",
+        "A mix design before the plant runs it."
+      ],
+      "evaluation": "A forecast is not a measurement. It expires when the conditions change.",
+      "owner": "The person who stated the conditions.",
+      "standing": "named",
+      "lane": { "r": 0.65, "g": 0.2, "b": 0.15 }
+    },
+    {
+      "id": "service",
+      "name": "Service",
+      "kind": "gate",
+      "descriptor": "Someone shows up with a method.",
+      "analogies": [
+        "A tool checked out of the crib.",
+        "A special inspection on the day of the work."
+      ],
+      "evaluation": "The method travels with the person. A page about the method is not the visit.",
+      "owner": "The person on site.",
+      "standing": "named",
+      "lane": { "r": 0.55, "g": 0.25, "b": 0.2 }
+    },
+    {
+      "id": "prayer",
+      "name": "Prayer",
+      "kind": "gate",
+      "descriptor": "Attention before the measurement.",
+      "analogies": [
+        "A pre-task briefing.",
+        "A calibration check."
+      ],
+      "evaluation": "Skipping it does not make the later number more true.",
+      "owner": "The person about to measure.",
+      "standing": "named",
+      "lane": { "r": 0.6, "g": 0.25, "b": 0.15 }
+    },
+    {
+      "id": "traits",
+      "name": "Traits",
+      "kind": "gate",
+      "descriptor": "What something is called.",
+      "analogies": [
+        "A nameplate on a rig.",
+        "A material class on a data sheet."
+      ],
+      "evaluation": "Adjacent to Tests, not the same seat. A class is not a result. A drawing that gives these two one label is the drawing's error.",
+      "owner": "The person who wrote the label.",
+      "standing": "named",
+      "lane": { "r": 0.62, "g": 0.22, "b": 0.16 }
+    },
+    {
+      "id": "tests",
+      "name": "Tests",
+      "kind": "gate",
+      "descriptor": "A question asked of a specimen or a member, under a named procedure.",
+      "analogies": [
+        "A trial batch.",
+        "A proof load."
+      ],
+      "evaluation": "The procedure has to be the one named. A nearby standard is not a substitute.",
+      "owner": "The tester.",
+      "standing": "named",
+      "lane": { "r": 0.58, "g": 0.27, "b": 0.15 }
+    },
+    {
+      "id": "repentance",
+      "name": "Repentance",
+      "kind": "gate",
+      "descriptor": "Look again after the change. The first result stays in the file.",
+      "analogies": [
+        "A retest after a repair.",
+        "A second survey after the scope moved."
+      ],
+      "evaluation": "The second look does not replace the first. Both remain.",
+      "owner": "The person who asked for the second look.",
+      "standing": "named",
+      "lane": { "r": 0.66, "g": 0.2, "b": 0.14 }
+    },
+    {
+      "id": "window",
+      "name": "Window",
+      "kind": "fft",
+      "descriptor": "Decide which slice of the record is in the room.",
+      "analogies": [
+        "A Hann window on a trace.",
+        "One job, not the whole archive."
+      ],
+      "evaluation": "What you leave outside the window is not deleted. It is just not in this reading.",
+      "owner": "The person who set the slice.",
+      "standing": "named",
+      "lane": { "r": 0.45, "g": 0.25, "b": 0.3 }
+    },
+    {
+      "id": "forward",
+      "name": "Forward",
+      "kind": "fft",
+      "descriptor": "Read the frequencies that are actually present.",
+      "analogies": [
+        "A forward transform.",
+        "A department list taken from this job, not from a template."
+      ],
+      "evaluation": "If a family is quiet on this job, do not invent a reading for it.",
+      "owner": "The analyst.",
+      "standing": "named",
+      "lane": { "r": 0.4, "g": 0.3, "b": 0.3 }
+    },
+    {
+      "id": "band",
+      "name": "Band",
+      "kind": "fft",
+      "descriptor": "Keep the carriers that answer the question. Leave the others in the file.",
+      "analogies": [
+        "A band-pass.",
+        "Petrography, chemistry, and strength kept as separate answers."
+      ],
+      "evaluation": "No single band is the diagnosis. That is the pavement example: each method answers a different question.",
+      "owner": "The reviewing engineer.",
+      "standing": "proposed",
+      "lane": { "r": 0.42, "g": 0.28, "b": 0.3 }
+    },
+    {
+      "id": "inverse",
+      "name": "Inverse",
+      "kind": "fft",
+      "descriptor": "Put the kept bands back into a form a person can schedule from.",
+      "analogies": [
+        "An inverse transform.",
+        "A narrative the coordinator can put on a board."
+      ],
+      "evaluation": "The rebuild has to point back at the bands you kept. If it cannot, it is a new story.",
+      "owner": "The person who signs the report.",
+      "standing": "named",
+      "lane": { "r": 0.38, "g": 0.32, "b": 0.3 }
+    }
+  ],
+  "twins": [
+    {
+      "primes": [3, 5],
+      "a": "intake",
+      "b": "construction",
+      "note": "The request meets the public construction family."
+    },
+    {
+      "primes": [5, 7],
+      "a": "bind",
+      "b": "geotechnical",
+      "note": "The lot meets the ground program."
+    },
+    {
+      "primes": [11, 13],
+      "a": "route",
+      "b": "pavements",
+      "note": "The question picks the method."
+    },
+    {
+      "primes": [17, 19],
+      "a": "witness",
+      "b": "ndt",
+      "note": "An indication is not yet a disposition."
+    },
+    {
+      "primes": [29, 31],
+      "a": "return",
+      "b": "environmental",
+      "note": "The report goes back with its limit."
+    },
+    {
+      "primes": [41, 43],
+      "a": "keep",
+      "b": "laboratories",
+      "note": "The sample record is what the next person reads."
+    },
+    {
+      "primes": [59, 61],
+      "a": "knowledge",
+      "b": "window",
+      "note": "Only the slice in the room."
+    },
+    {
+      "primes": [71, 73],
+      "a": "prophecy",
+      "b": "forward",
+      "note": "A forecast reads what is present. It is not a new fact."
+    },
+    {
+      "primes": [101, 103],
+      "a": "service",
+      "b": "band",
+      "note": "Keep the method that serves this question."
+    },
+    {
+      "primes": [107, 109],
+      "a": "prayer",
+      "b": "inverse",
+      "note": "Attention first, then a form someone can use."
+    },
+    {
+      "primes": [137, 139],
+      "a": "traits",
+      "b": "tests",
+      "note": "A name is not a result."
+    },
+    {
+      "primes": [149, 151],
+      "a": "building",
+      "b": "repentance",
+      "note": "Distress, then a second look after the repair."
+    }
+  ]
+}

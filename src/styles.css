@@ -18,6 +18,7 @@
   --color-warn-soft: color-mix(in oklab, var(--color-warn) 16%, transparent);
   --color-danger: #c49292;
   --color-danger-soft: color-mix(in oklab, var(--color-danger) 16%, transparent);
+  --color-street: #8aa4c4;
 
   --font-sans: "Figtree", "Segoe UI", system-ui, sans-serif;
   --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", serif;

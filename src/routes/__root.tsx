@@ -10,7 +10,7 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "FCP Adapter";
+const APP_NAME = "Living Atlas";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,7 +20,8 @@ export const Route = createRootRoute({
       { title: APP_NAME },
       {
         name: "description",
-        content: "Make a field connection profile, or connect one you already have.",
+        content:
+          "Twenty-five seats, the open GSOC handoff, and a place to append a port you already have.",
       },
       { name: "theme-color", content: "#0a0a0b" },
     ],

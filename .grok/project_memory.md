@@ -1,0 +1,6 @@
+- Möbii³us v0.8 evidence-clamped; six open items tracked in artifacts/receipts/open_items_state_transitions.json [2026-08-14]
+- Kernel smoke PASS: event_id evt-073a72fb1cdcb35d, record_hash 06a178a10baaa415e395e45497fcc9a8bba8c7d8952a1dba23135cd9c0edc808, pre/post hashes deterministic on re-run [2026-08-14]
+- Named endpoints aspirational localhost only (8701–8710); health NOT_PROBED except in-memory smoke [2026-08-14]
+- CRED is process not currency; dictionary + fairness scaffold in artifacts/receipts/cred_dictionary_draft.json [2026-08-14]
+- Artifacts layout: ledger/, receipts/, registry/, smoke/ under /home/workdir/artifacts [2026-08-14]
+- Offline canvas at artifacts/mobius-offline-canvas/index.html now has 6 cards: Event Kernel, Evidence Clamp, Toolbox, CRED, Edge Hybrid, Team AET Service Families (public catalogue only) [2026-10-15]

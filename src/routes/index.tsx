@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AdapterPage } from "@/components/adapter/adapter-page";
+import { AtlasPage } from "@/components/atlas/atlas-page";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  return <AdapterPage />;
+  return <AtlasPage />;
 }

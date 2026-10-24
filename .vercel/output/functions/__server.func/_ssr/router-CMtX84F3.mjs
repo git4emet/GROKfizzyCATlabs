@@ -6,8 +6,8 @@ import { a as union, i as string, n as number, r as object, t as literal } from 
 import { t as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { t as Toaster } from "../_libs/sonner.mjs";
 import { t as Provider } from "../_libs/radix-ui__react-tooltip.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-BVALnGum.js
-var router_BVALnGum_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
+//#region node_modules/.nitro/vite/services/ssr/assets/router-CMtX84F3.js
+var router_CMtX84F3_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function AppErrorComponent({ error }) {
@@ -282,9 +282,9 @@ function TooltipProvider({ delayDuration = 200, ...props }) {
 		...props
 	});
 }
-var styles_default = "/assets/styles-DmTWivVf.css";
-var APP_NAME = "FCP Adapter";
-var Route$1 = createRootRoute({
+var styles_default = "/assets/styles-BqW9E60n.css";
+var APP_NAME = "Living Atlas";
+var Route$2 = createRootRoute({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -295,7 +295,7 @@ var Route$1 = createRootRoute({
 			{ title: APP_NAME },
 			{
 				name: "description",
-				content: "Make a field connection profile, or connect one you already have."
+				content: "Twenty-five seats, the open GSOC handoff, and a place to append a port you already have."
 			},
 			{
 				name: "theme-color",
@@ -357,13 +357,23 @@ function RootDocument() {
 		})]
 	});
 }
-var $$splitComponentImporter = () => import("./routes-BigzHql3.mjs");
-var rootRouteChildren = { IndexRoute: createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter, "component") }).update({
-	id: "/",
-	path: "/",
-	getParentRoute: () => Route$1
-}) };
-var routeTree = Route$1._addFileChildren(rootRouteChildren)._addFileTypes();
+var $$splitComponentImporter$1 = () => import("./routes-Cmf-PZSr.mjs");
+var Route$1 = createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter$1, "component") });
+var $$splitComponentImporter = () => import("./connect-CH8lccqK.mjs");
+var Route = createFileRoute("/connect")({ component: lazyRouteComponent($$splitComponentImporter, "component") });
+var rootRouteChildren = {
+	IndexRoute: Route$1.update({
+		id: "/",
+		path: "/",
+		getParentRoute: () => Route$2
+	}),
+	ConnectRoute: Route.update({
+		id: "/connect",
+		path: "/connect",
+		getParentRoute: () => Route$2
+	})
+};
+var routeTree = Route$2._addFileChildren(rootRouteChildren)._addFileTypes();
 function getRouter() {
 	return createRouter({
 		routeTree,
@@ -371,4 +381,4 @@ function getRouter() {
 	});
 }
 //#endregion
-export { getRouter, router_BVALnGum_exports as t };
+export { getRouter, router_CMtX84F3_exports as t };

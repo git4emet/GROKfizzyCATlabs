@@ -116,7 +116,15 @@ export function AdapterPage() {
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6">
       <header className="flex flex-col gap-3">
-        <p className="font-mono text-xs tracking-wide text-muted uppercase">Adapter</p>
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-mono text-xs tracking-wide text-muted uppercase">Adapter</p>
+          <a
+            href="/"
+            className="font-mono text-xs text-muted underline-offset-4 hover:text-fg hover:underline"
+          >
+            Atlas
+          </a>
+        </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-xl">
             <h1 className="font-display text-4xl leading-tight text-fg">FCP</h1>
