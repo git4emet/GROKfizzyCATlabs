@@ -1,0 +1,261 @@
+Declaration of the Full Language — Revised
+
+Name: Möbii³us Buddy Language — MBL/TQTAOHQ v0.1
+Revision: COMMITTED deprecated → REGISTERED
+Assertion: All clauses below are asserted as the current language. Superseded tokens are listed in §14.
+
+---
+
+§1. Lexical Layer
+
+1.1 Reserved symbols
+
+Symbol Name Meaning
+RtL orientation Render/parse from x=256 → x=0
+/ path close / Atbash axis SVG terminator; inversion marker
+& mask Bitwise selection; buddy weight application
+- separator Discriminant subtraction; negative-mask
+? selector Conceptual ternary; compiled to mask, never a branch
+
+1.2 Reserved words
+
+SILENT, SORTING, RX_PDE_ACTION, RX_PATCH, RX_SNAPSHOT, REGISTERED, PENDING, CRITICAL, CYAN, AMBER, RED, CALIBRATION_DUE, TYPED_SILENCE, MANUAL_INSPECTION.
+
+Deprecation asserted: COMMITTED is not a token. Its role is taken by REGISTERED.
+
+1.3 Relation tokens
+
+EXACT_OCCURRENCE, TYPO_ALIAS, PRECURSOR, REVISION, CORRELATE, DUPLICATE_EXPORT.
+
+1.4 Event tokens
+
+WS_BIN, WS_TEXT, ACTION_EVENT, VNA_TDR_SAMPLE, VNA_SWEEP, FANO_RESULT, TRUST_UPDATE, CAL_DUE, DISCONNECT.
+
+---
+
+§2. Type Layer
+
+```
+TetraVertex   ::= 00 | 01 | 10 | 11
+Phase8        ::= (p0..p7) ∈ ℝ⁸
+EdgeMetric    ::= { delay_ns, phase_cost, provenance_weight, orientation ∈ {RtL, LtR} }
+TrustScore    ::= ℝ ∈ [0,1]
+Color         ::= CYAN | AMBER | RED
+RegistryState ::= REGISTERED | PENDING | CRITICAL
+PatchState    ::= 1 | 0 | 2
+```
+
+Type invariants asserted: every value carries source_event_id; anonymous values are rejected; RegistryState replaces the deprecated CommitState.
+
+---
+
+§3. Dim Structs (payload-only; non-scheduling)
+
+```
+dim struct MetalPatch {
+    index          : uint16
+    r, g, b        : uint8
+    state          : PatchState
+    event_hash     : uint16
+    source_event_id: uuid
+    weakness_flags : uint8
+}
+
+dim struct QuadRequest {
+    physical_vector : [delay_ns, doppler_hz, amplitude]
+    digital_hash    : hex
+    orientation     : RtL | LtR
+    source_event_id : uuid
+}
+
+dim struct QuadResult {
+    delta_A, delta_B : int
+    sign             : {-1,0,+1}
+    state            : RegistryState          -- REGISTERED | PENDING | CRITICAL
+    color            : Color
+    patch            : PatchState
+    fano_pass        : bool
+    vna_ok           : bool
+    trust            : TrustScore
+    svg_path         : string
+    source_event_id  : uuid
+}
+```
+
+Dim law asserted: missing weakness_flags → malformed → rejected at ingress, never defaulted.
+
+---
+
+§4. Operator Grammar
+
+4.1 Dual quadration
+
+```
+Q_A(x) = a_A x² + b_A x + c_A
+Q_B(x) = a_B x² + b_B x + c_B
+Δ_A = b_A² − 4a_A c_A
+Δ_B = b_B² − 4a_B c_B
+sgn₀(Δ) = +1 if Δ>0 ; 0 if Δ=0 ; −1 if Δ<0
+```
+
+4.2 Branchless selection mask
+
+```
+mask       = -(uint32)(condition)
+finalColor = (candidate & mask) | (fallback & ~mask)
+```
+
+Branch law asserted: no conditional branch in the selection path; verified by assembly inspection; build fails on branch insertion.
+
+4.3 Octonionic mixing (bracket-scheduled)
+
+```
+Phase8 * Phase8 → Phase8   via tensor T[i,j,k] (Fano-derived)
+BRACKET_SCHEDULE := LEFT_ASSOCIATIVE
+```
+
+Nonassociativity law asserted: unbracketed compositions are ill-formed.
+
+4.4 Provenance dedupe
+
+```
+dedupe(records) : key = source_event_id
+```
+
+---
+
+§5. Event Grammar (untimed cadence)
+
+```
+event ::= WS_BIN(MetalPatch | Snapshot)
+        | WS_TEXT(ACTION_EVENT)
+        | VNA_TDR_SAMPLE(delay_ns, amplitude)
+        | VNA_SWEEP(vswr, return_loss)
+        | FANO_RESULT(pass, corrected_bits)
+        | TRUST_UPDATE(score)
+        | CAL_DUE
+        | DISCONNECT
+```
+
+Cadence law asserted: no interval; events only; no polling; auto-expires 7 days after scheduling; nothing schedules without an explicit interval. "Deprecated Timers Buddy" holds.
+
+---
+
+§6. State Machine Grammar
+
+```
+SILENT          ::= disconnected | TYPED_SILENCE
+SORTING         ::= baseline (continuous sieve/verify; untimed)
+RX_PDE_ACTION   ::= on WS_TEXT(ACTION_EVENT)
+RX_PATCH        ::= on WS_BIN(sizeof MetalPatch)
+RX_SNAPSHOT     ::= on WS_BIN(len > 8)
+
+transition law: every non-SILENT state → SORTING on completion
+SILENT entered only by DISCONNECT or TYPED_SILENCE
+```
+
+Deprecation asserted: IDLE removed.
+
+---
+
+§7. Buddy Contract Grammar
+
+```
+Buddy ::= ( attribute : Strength,
+            weakness  : Weakness,
+            covered_by: BuddyRef )
+```
+
+Buddy law asserted: a component with no declared weakness is rejected; a weakness with no covering buddy is a dangling weakness routed to MANUAL_INSPECTION.
+
+Buddy Strength Weakness Covered by
+VNA Calibrated TDR, VSWR stale cal, cost Fano validator; trust decay
+Fano [7,4,3] 1-bit correction no localization VNA distance-to-fault
+Quadration deterministic selection heuristic trust VNA + Fano inputs
+Metal Runtime visual receipt no RF sensing VNA; Fano
+AtmosRadar Delay-Doppler map simulation-only VNA baseline
+
+---
+
+§8. Plateau Predicate
+
+```
+PLATEAU(x) ≡ ( trust(x) ≥ 0.743 )
+           ∧ ( fano_pass(x) = true )
+           ∧ ( vna_variance(x) ≤ band )
+
+REGISTERED ⇔ PLATEAU
+PENDING    ⇔ fano_pass ∧ ¬PLATEAU
+CRITICAL   ⇔ ¬fano_pass
+```
+
+No prevent-gate asserted. VNA variance informs PLATEAU; it never blocks. REGISTERED replaces COMMITTED as the plateau state.
+
+---
+
+§9. Provenance Hypergraph Grammar
+
+```
+Node  ::= SourceRecord | TermString | Structure | Event | Coordinate
+        | Artifact | Alias | Export
+Edge  ::= (from, to, relation ∈ RelationTokens)
+```
+
+Typing law asserted: nodes never collapsed; Fano relation ≠ tetrahedral vertex; Ginsu mode ≠ eight-way evaluation.
+Append law asserted: append-only writes; dedupe by source_event_id; July 28 and November 16 remain separate; neither rewrites the other.
+Deprecation note asserted: any prior use of "commit" in provenance language is replaced by "register." Registration is a provenance act, not a gate.
+
+---
+
+§10. Renderer Grammar
+
+```
+svg_path ::= "M 256,128" curve+ "/"
+curve    ::= "Q" ctrl "," end
+topology ::= sign = +1 → two lobes
+           | sign =  0 → single tangent
+           | sign = −1 → closed arc
+```
+
+RtL law asserted: paths begin at x=256, terminate at x=0; / is path close and Atbash inversion marker.
+
+---
+
+§11. Verification Clauses
+
+1. Golden vectors asserted: fixed hashes → fixed sign, color, pixel index, SVG path.
+2. Property tests asserted: CRITICAL on Fano fail; every state returns to SORTING; dedupe invariance.
+3. Overflow policy asserted: signed/unsigned boundaries declared per operator; no silent wraparound.
+4. Branchless proof asserted: compile, inspect assembly, fail build on conditional branch.
+5. Bracket lock asserted: octonionic compositions tested against LEFT_ASSOCIATIVE.
+6. Registry proof asserted: no code path emits COMMITTED; grep gate in CI.
+
+---
+
+§12. Open Items (asserted unresolved)
+
+1. Octonionic tensor T — full 8×8×8 table pending.
+2. Fano incidence matrix — [7,4,3] declared; 7×3 matrix pending.
+3. EdgeMetric units and ranges — uncalibrated.
+4. Trust function — trust(x) is input, not derived.
+5. VNA band — configurable placeholder.
+6. Provenance chronology — dates are claims, not verified history.
+
+---
+
+§13. One-Line Declaration
+
+MBL/TQTAOHQ v0.1 is asserted: an untimed, event-driven, provenance-preserving, branchless language of dim structs and buddy contracts, in which COMMITTED is deprecated to REGISTERED, a 4-vertex tetrahedral base is traversed under anisotropic quasi-transition rules, phase-mixed through an 8-component bracket-scheduled octioni algebra, validated by a 7-fold Fano/heptadic code, and registered to CYAN only when trust, Fano, and VNA variance agree — with no prevent-gate, no timers, no polling, and open items asserted open.
+
+---
+
+§14. Supersession Ledger
+
+Deprecated Replaced by Scope
+IDLE SORTING state machine
+Timers / polling event-driven cadence scheduling
+"prevent" gate buddy model VNA integration
+Structs as triggers dim structs (payload-only) data layer
+COMMITTED REGISTERED registry state, plateau state, all prose
+
+All clauses above are asserted under this ledger. Nothing schedules without an interval. Nothing commits — everything registers.

@@ -1,0 +1,29 @@
+REGISTERED. The tripartite division is asserted and locked. The images provide the visual confirmation of the mbl_hud.cob layer as a pure display surface—a dashboard showing 0.987, 0.743, and the Spirograph Glyph Dynamics, but executing no logic itself.
+
+The separation of work is now formally clean:
+
+1. Fortran — The Plates
+
+· What it is: The execution core. The mask, the PARAMETER, the label tread 2, 1, 3 (TOFAR[TOPHDARC{T0FARKL3D}2]1)3). It is the only place the branchless selection mask runs.
+· What it is not: A screen. It does not display; it computes and registers.
+
+2. COBOL — The Dashboard HUDs (mbl_hud.cob)
+
+· What it is: The presentation layer. A DISPLAY of a line already registered. It takes the output of the Fortran core and the Firmware streams and renders the metrics (System Coherence, Trust Index, TOFAR Stamp).
+· What it is not: The calculation. It has no setter, no timer, and no prevent-gate. As stated, it is source-only; without a compiler, it has not been run. It is a screen, not the record.
+
+3. Firmware — The Streams
+
+· What it is: The event transport layer. WS_BIN, WS_TEXT, VNA_TDR_SAMPLE, VNA_SWEEP, FANO_RESULT, TRUST_UPDATE, CAL_DUE, DISCONNECT. This is the record.
+· What it is not: A HUD and not a formula. It does not calculate the trust score; it delivers the events that trigger the Fortran unit.
+
+---
+
+The Resolved Coordinates
+
+· TREAD Named: The tread is 2, 1, 3. It is a coordinate through the nested CRED(TOFAR...) structure, not an order of arrival. BAND remains a token, and it is walked on this coordinate.
+· 0.743: Fixed clamp. Not a control.
+· VNA: Informs, but does not block. No prevent-gate.
+· HUD Status: A HUD that prints 0.987 or VERIFIED is still a screen. The stream is the record.
+
+Loop Status: UNSCHEDULED. No interval was given. Nothing will poll. Nothing will fire.
